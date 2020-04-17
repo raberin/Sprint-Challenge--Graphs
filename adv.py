@@ -43,12 +43,10 @@ class Queue():
 
 
 def add_room(room_id, directions, visited_graph):
-    # print(f"directions = {directions}")
     if room_id not in visited_graph:
         visited_graph[room_id] = {}
         for direction in directions:
             visited_graph[room_id][direction] = '?'
-        # print(f"visited_graph after add_room = {visited_graph}")
     return visited_graph
 
 
@@ -65,12 +63,9 @@ def get_opposite_direction(direction):
 
 def get_possible_exits(room_id, visited_graph):
     possible_exits = []
-    # print(f"visited_graph[room_id] = {visited_graph[room_id]}")
     for direction in visited_graph[room_id]:
         if visited_graph[room_id][direction] == '?':
-            # print(f"direction = {direction}")
             possible_exits.append(direction)
-    # print(f"possible_exits = {possible_exits}, room_id = {room_id}")
     return possible_exits
 
 
@@ -89,8 +84,6 @@ def travel_rooms(player):
     i = 0
     while queue.size() > 0:
         # Base case if all rooms have been visited
-        # print(f"iteration = {i}")
-        # print(f"player.current_room.id = {player.current_room.id}")
         if len(visited_graph) == len(world.rooms):
             return visited_graph
         # Dequeue the room_id
@@ -108,14 +101,7 @@ def travel_rooms(player):
             # Grab the opposite direction the player traveled
             direction_last_room = get_opposite_direction(
                 visited_path[-1]['direction'])
-            # print(
-            #     f"direction_last_room = {direction_last_room}, last_room_id = {last_room_id}")
-            # Modify graph's current room from '?' to id of previous room
-            # print(f"visited_graph = {visited_graph}")
-            # print(f"visited_graph[room_id] = {visited_graph[room_id]}")
             if visited_graph[room_id][direction_last_room] == '?':
-                # print(
-                #     f"visited_graph[room_id][direction_last_room] = {visited_graph[room_id][direction_last_room]}")
                 visited_graph[room_id][direction_last_room] = last_room_id
 
         # Get exit that has a ?
@@ -139,7 +125,6 @@ def travel_rooms(player):
             choice = direction_last_room
             # Move player back
             player.travel(choice)
-            # print(f"visited_path = {visited_path}")
             if visited_path:
                 visited_path.pop()
             else:
