@@ -125,11 +125,7 @@ def travel_rooms(player):
             choice = direction_last_room
             # Move player back
             player.travel(choice)
-            if visited_path:
-                visited_path.pop()
-            else:
-                traversal_path.append(choice)
-                return visited_graph
+            visited_path.pop()
 
         # Add move to traversal path
         traversal_path.append(choice)
